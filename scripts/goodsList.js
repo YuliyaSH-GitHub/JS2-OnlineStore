@@ -1,31 +1,39 @@
 class GoodsList {
     constructor() {
         this.goods = [];
-        this.сompleteGoods();
+        this.fetchGoods();
     }
     /**
      * Метод добавляет товары в массив goods
      */
-    сompleteGoods() {
+    fetchGoods() {
         this.goods = [{
+
                 imageUrl: 'image/goods/img1.jpg',
                 title: 'Phone',
-                price: 150
+                price: 150,
+                id: 1
             },
             {
+
                 imageUrl: 'image/goods/img2.jpg',
                 title: 'Headphones',
-                price: 50
+                price: 50,
+                id: 2
             },
             {
+
                 imageUrl: 'image/goods/img3.jpg',
                 title: 'Wireless headphones',
-                price: 350
+                price: 350,
+                id: 3
             },
             {
+
                 imageUrl: 'image/goods/img4.jpg',
                 title: 'Wristwatch',
-                price: 250
+                price: 250,
+                id: 4
             },
         ];
     }
@@ -39,6 +47,12 @@ class GoodsList {
             divGoodsList.insertAdjacentHTML('beforeend', goodsItem.renderGoodsItem());
         }
     }
+    /**
+     * Метод считает суммарную стоимость товаров
+     */
+    countTotalCost() {
+
+    }
 }
 
 class GoodsItem {
@@ -46,6 +60,7 @@ class GoodsItem {
         this.imageUrl = goods.imageUrl;
         this.title = goods.title
         this.price = goods.price
+        this.id = goods.id
     }
     /**
      * Метод отрисовывает разметку карточки товара
@@ -56,11 +71,10 @@ class GoodsItem {
         <img class= "b-goodsList__img" src=${this.imageUrl} alt="goods">
         <h3>${this.title}</h3>
         <p>${this.price}</p>
-        <button class="b-goodButton">Купить</button>
+        <button class="b-goodButton" data-id = "${this.id}" data-title = "${this.title}" data-price = "${this.price}" >Купить</button>
         </div>`;
     }
 }
 
 let goodsList = new GoodsList();
 goodsList.renderGoodsList();
-
