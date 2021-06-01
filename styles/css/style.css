@@ -15,6 +15,7 @@ button {
 }
 
 .b-OnlineStoreHeader {
+  position: relative;
   min-height: 60px;
   padding: 0 10px;
   background-color: #494949;
@@ -39,6 +40,24 @@ button {
   line-height: 18px;
   color: #383838;
   border-radius: 5px;
+}
+
+.b-OnlineStoreHeader__dropdownMenu {
+  min-width: 300px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #969595;
+  border-radius: 7px;
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  left: auto;
+}
+
+.b-OnlineStoreHeader__table th,
+.b-OnlineStoreHeader__table td {
+  padding: 10px;
 }
 
 .b-goodsList_grid {
