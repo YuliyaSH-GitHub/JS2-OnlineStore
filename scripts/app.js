@@ -35,7 +35,7 @@ const renderGoodsItem = (product) => {
 const renderGoodsList = (list) => {
     let goodsList = list.map(item => renderGoodsItem(item)).join(' ');
     document.querySelector('.b-goodsList').innerHTML = goodsList;
-    console.log(goodsList);
+    // console.log(goodsList);
 }
 
 renderGoodsList(goods);
