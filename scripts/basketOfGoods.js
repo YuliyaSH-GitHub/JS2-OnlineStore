@@ -1,4 +1,4 @@
-class BasketButton {
+class BasketOfGoods {
     constructor() {
         this.basketButton = document.querySelector('.b-OnlineStoreHeader__basketButton');
         this.dropdownMenu = document.querySelector('.b-OnlineStoreHeader__dropdownMenu');
@@ -21,6 +21,6 @@ class BasketButton {
     }
 
 }
-let basketButton = new BasketButton();
-basketButton.addEventListenerButton();
-basketButton.addEventListenerDropdownMenu();
+let basketOfGoods = new BasketOfGoods();
+basketOfGoods.addEventListenerButton();
+basketOfGoods.addEventListenerDropdownMenu();
