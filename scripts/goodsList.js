@@ -1,41 +1,23 @@
+const API = "http://js2-onlinestore/"; //файл json хранится на локальном сервере
 class GoodsList {
     constructor() {
         this.goods = [];
-        this.fetchGoods();
+        this._fetchGoods()
+            .then(data => { // после result.json()) получаем объект data
+                this.goods = [...data];
+                // console.log(this.goods);
+                this.renderGoodsList()
+            });
     }
     /**
-     * Метод добавляет товары в массив goods
+     * Метод получает товары в формате json с локального сервера
      */
-    fetchGoods() {
-        this.goods = [{
-
-                imageUrl: 'image/goods/img1.jpg',
-                title: 'Phone',
-                price: 150,
-                id: 1
-            },
-            {
-
-                imageUrl: 'image/goods/img2.jpg',
-                title: 'Headphones',
-                price: 50,
-                id: 2
-            },
-            {
-
-                imageUrl: 'image/goods/img3.jpg',
-                title: 'Wireless headphones',
-                price: 350,
-                id: 3
-            },
-            {
-
-                imageUrl: 'image/goods/img4.jpg',
-                title: 'Wristwatch',
-                price: 250,
-                id: 4
-            },
-        ];
+    _fetchGoods() {
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            })
     }
     /**
      * Метод в цикле for обходит массив товаров goods, для каждого объекта массива формируется карточка товара
@@ -50,8 +32,9 @@ class GoodsList {
     /**
      * Метод считает суммарную стоимость товаров
      */
-    countTotalCost() {
-
+    countTotalCostOfGoods() {
+        let totalCost = this.goods.reduce((previousValue, item) => previousValue + item.price, 0);
+        console.log(totalCost);
     }
 }
 
@@ -78,3 +61,4 @@ class GoodsItem {
 
 let goodsList = new GoodsList();
 goodsList.renderGoodsList();
+goodsList.countTotalCostOfGoods();

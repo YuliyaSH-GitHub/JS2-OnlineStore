@@ -19,6 +19,13 @@ class BasketOfGoods {
             this.dropdownMenu.style.cssText = "display: none"
         });
     }
+        /**
+     * Метод считает суммарную стоимость товаров в корзине
+     */
+         countTotalCost() {
+
+        }
+        
 
 }
 let basketOfGoods = new BasketOfGoods();

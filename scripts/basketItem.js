@@ -7,13 +7,13 @@ class BasketItem {
      */
     addEventListenerGoodButton() {
         this.goodButton.forEach((button) => {
-            button.addEventListener('click', this.addGoodsInBasket.bind(BasketItem));
+            button.addEventListener('click', this.renderGoodsInBasket);
         });
     }
     /**
-     * Метод добавляет товары в корзину
+     * Метод отрисовывает товары в корзине
      */
-    addGoodsInBasket(event) {
+    renderGoodsInBasket(event) {
         let target = event.target;
         let goodsInBasket =
             `<tr>
@@ -28,6 +28,17 @@ class BasketItem {
 
 
     }
+
+    /**
+     * Метод добавляет товары в корзину (массив товаров)
+     */
+     addGoodsInBasket(event) {}
+    /**
+     * Метод удаляет товары из корзины
+     */
+    removeGoodsInBasket(event) {}
+
+
 
 }
 let basketItem = new BasketItem();
