@@ -1,6 +1,7 @@
 class BasketItem {
     constructor() {
         this.goodButton = document.querySelectorAll('.b-goodButton');
+ 
     }
     /**
      * Метод назначает слушателя события кнопке товара
@@ -13,21 +14,21 @@ class BasketItem {
     /**
      * Метод отрисовывает товары в корзине
      */
-    renderGoodsInBasket(event) {
-        let target = event.target;
-        let goodsInBasket =
-            `<tr>
-            <th scope="row">${target.dataset.id}</th>
-            <td>${target.dataset.title}</td>
-            <td>${target.dataset.price}</td>
-            <td class="productCount" data-id="${target.dataset.id}">1</td>
-            <td><i class="fas fa-trash-alt productRemoveBtn" data-id="${target.dataset.id}"></i></td>
-            </tr>`;
-        let tbody = document.querySelector('tbody');
-        tbody.insertAdjacentHTML('beforeend', goodsInBasket);
+    // renderGoodsInBasket(event) {
+    //     let target = event.target;
+    //     let goodsInBasket =
+    //         `<tr>
+    //         <th scope="row">${target.dataset.id}</th>
+    //         <td>${target.dataset.title}</td>
+    //         <td>${target.dataset.price}</td>
+    //         <td class="productCount" data-id="${target.dataset.id}">1</td>
+    //         <td><i class="fas fa-trash-alt productRemoveBtn" data-id="${target.dataset.id}"></i></td>
+    //         </tr>`;
+    //     let tbody = document.querySelector('tbody');
+    //     tbody.insertAdjacentHTML('beforeend', goodsInBasket);
 
 
-    }
+    // }
 
     /**
      * Метод добавляет товары в корзину (массив товаров)
@@ -43,3 +44,7 @@ class BasketItem {
 }
 let basketItem = new BasketItem();
 basketItem.addEventListenerGoodButton();
+
+
+
+
