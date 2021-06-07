@@ -116,4 +116,8 @@ button {
   color: #fff;
   border-radius: 5px;
 }
+
+.b-buttonClose {
+  font-size: 30px !important;
+}
 /*# sourceMappingURL=style.css.map */

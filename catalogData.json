@@ -4,27 +4,27 @@
     "imageUrl": "image/goods/img1.jpg",
     "title": "Phone",
     "price": 150,
-    "id": 1
+    "id": 0
   },
   {
 
     "imageUrl": "image/goods/img2.jpg",
     "title": "Headphones",
     "price": 50,
-    "id": 2
+    "id": 1
   },
   {
 
     "imageUrl": "image/goods/img3.jpg",
     "title": "Wireless headphones",
     "price": 350,
-    "id": 3
+    "id": 2
   },
   {
 
     "imageUrl": "image/goods/img4.jpg",
     "title": "Wristwatch",
     "price": 250,
-    "id": 4
+    "id": 3
   }
 ]

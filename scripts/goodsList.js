@@ -2,12 +2,16 @@ const API = "http://js2-onlinestore/"; //файл json хранится на л�
 class GoodsList {
     constructor() {
         this.goods = [];
+        this.goodButton = [];
         this._fetchGoods()
             .then(data => { // после result.json()) получаем объект data
                 this.goods = [...data];
                 // console.log(this.goods);
-                this.renderGoodsList()
+                this.renderGoodsList();
+                let basketItem = new BasketItem();
+                basketItem.addEventListenerGoodButton();
             });
+
     }
     /**
      * Метод получает товары в формате json с локального сервера
@@ -28,6 +32,7 @@ class GoodsList {
             let goodsItem = new GoodsItem(product);
             divGoodsList.insertAdjacentHTML('beforeend', goodsItem.renderGoodsItem());
         }
+
     }
     /**
      * Метод считает суммарную стоимость товаров
@@ -57,8 +62,13 @@ class GoodsItem {
         <button class="b-goodButton" data-id = "${this.id}" data-title = "${this.title}" data-price = "${this.price}" >Купить</button>
         </div>`;
     }
+
 }
 
 let goodsList = new GoodsList();
-goodsList.renderGoodsList();
-goodsList.countTotalCostOfGoods();
+// goodsList.renderGoodsList();
+// goodsList.countTotalCostOfGoods();
+
+
+
+
