@@ -27,7 +27,7 @@ class BasketItem {
     _addProduct(product) {
         this._addProductToObject(product);
         this._renderGoodsInBasket(product);
-        // this._renderTotalSum();
+        this._renderTotalSum();
         // this._addRemoveBtnLesteners();
     }
     /**
@@ -42,13 +42,18 @@ class BasketItem {
                 count: 1,
             }
         } else {
-            this.products[products.id].count++;
+            this.products[product.id].count++;
         }
     }
     /**
      * Метод отрисовывает товары в корзине
      */
     _renderGoodsInBasket(product) {
+        let productExist = document.querySelector(`.productCount[data-id="${product.id}"]`);
+        if (productExist) {
+            productExist.textContent++;
+            return;
+        }
         let goodsInBasket =
             `<tr>
             <th scope="row">${product.id}</th>
@@ -60,6 +65,16 @@ class BasketItem {
         let tbody = document.querySelector('tbody');
         tbody.insertAdjacentHTML('beforeend', goodsInBasket);
 
+    }
+    _renderTotalSum() {
+        document.querySelector('.total').innerHTML = this._getTotalSum();
+    }
+    _getTotalSum() {
+        let totalSum = 0;
+        this.products.forEach(item => {
+            totalSum += item.price * item.count;
+        })
+        return totalSum;
     }
 
     // /**
