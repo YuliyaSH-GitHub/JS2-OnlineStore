@@ -1,13 +1,12 @@
 class BasketItem {
     constructor() {
-        this.goodButton = document.querySelectorAll(".b-goodButton");
         this.products = [];
     }
     /**
      * Метод назначает слушателя события кнопке товара
      */
     addEventListenerGoodButton() {
-        this.goodButton.forEach((button) => {
+        document.querySelectorAll(".b-goodButton").forEach((button) => {
             button.addEventListener("click", (event) => {
                 let id = event.target.dataset.id;
                 let title = event.target.dataset.title;
@@ -28,7 +27,7 @@ class BasketItem {
         this._addProductToObject(product);
         this._renderGoodsInBasket(product);
         this._renderTotalSum();
-        // this._addRemoveBtnLesteners();
+        this._addRemoveBtnLesteners();
     }
     /**
      * Метод добавляет товары в массив товаров this.products
@@ -44,6 +43,7 @@ class BasketItem {
         } else {
             this.products[product.id].count++;
         }
+
     }
     /**
      * Метод отрисовывает товары в корзине
@@ -66,9 +66,15 @@ class BasketItem {
         tbody.insertAdjacentHTML('beforeend', goodsInBasket);
 
     }
+    /**
+     * Метод выводит стоимость корзины 
+     */
     _renderTotalSum() {
         document.querySelector('.total').innerHTML = this._getTotalSum();
     }
+    /**
+     * Метод считает итоговую стоимость корзины 
+     */
     _getTotalSum() {
         let totalSum = 0;
         this.products.forEach(item => {
@@ -76,15 +82,58 @@ class BasketItem {
         })
         return totalSum;
     }
+    /**
+     * Метод назначает обработчик события кнопкам удаления из корзины 
+     */
+    _addRemoveBtnLesteners() {
+        let dropdownMenu = document.querySelector('.b-OnlineStoreHeader__dropdownMenu');
+        let productRemoveBtn = dropdownMenu.querySelectorAll('.productRemoveBtn');
+        console.log(productRemoveBtn);
+        productRemoveBtn.forEach(item => {
+            item.addEventListener('click', this._removeProduct.bind(this));
+        });
+    }
+    /**
+     * Метод удаляет товар из корзины и пересчитывает стоимость корзины
+     * @param {Event} e 
+     */
+    _removeProduct(e) {
+        this._removeGoods(e);
+        this._renderTotalSum();
 
-    // /**
-    //  * Метод добавляет товары в корзину (массив товаров)
-    //  */
-    // addGoodsInBasket() {}
-    // /**
-    //  * Метод удаляет товары из корзины
-    //  */
-    // removeGoodsInBasket() {}
+    }
+    /**
+     *  Метод запускает удаление из корзины и из массива товаров
+     * @param {Event} e 
+     */
+    _removeGoods(e) {
+        let id = e.target.dataset.id;
+        this._removeProductFromObject(id);
+        this._removeProductFromBasket(id);
+    }
+    /**
+     * Метод удаляет продукт из массива с продуктами.
+     * @param {string} id
+     */
+    _removeProductFromObject(id) {
+        if (this.products[id].count == 1) {
+            delete this.products[id];
+        } else {
+            this.products[id].count--;
+        }
+    }
+    /**
+     *  Метод удаляет товар из корзины.
+     * @param {string} id
+     */
+    _removeProductFromBasket(id) {
+        let countTd = document.querySelector(`.productCount[data-id="${id}"]`);
+        if (countTd.textContent == 1) {
+            countTd.parentNode.remove();
+        } else {
+            countTd.textContent--;
+        }
+    }
 }
 // let basketItem = new BasketItem();
 // basketItem.addEventListenerGoodButton();
