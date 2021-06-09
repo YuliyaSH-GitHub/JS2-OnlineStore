@@ -8,7 +8,6 @@ class GoodsList {
         this._fetchGoods()
             .then(data => { // после result.json()) получаем объект data
                 this.goods = [...data];
-                // console.log(this.goods);
                 this.renderGoodsList();
             });
 
@@ -33,8 +32,6 @@ class GoodsList {
             this.allProducts.push(goodsItem);
             divGoodsList.insertAdjacentHTML('beforeend', goodsItem.renderGoodsItem());
         }
-        let basketItem = new BasketItem();
-        basketItem.addEventListenerGoodButton();
         document.querySelector('.searchForm').addEventListener('submit', e => {
             e.preventDefault();
             this.filter(document.querySelector('.searchField').value);

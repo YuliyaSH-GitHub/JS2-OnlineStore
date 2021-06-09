@@ -35,6 +35,21 @@ button {
   display: none;
 }
 
+.productRemoveBtn {
+  font-size: 17px !important;
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
+.productRemove {
+  font-size: 16px !important;
+  vertical-align: middle;
+}
+
+.productRemoveBtn {
+  margin-right: 10px;
+}
+
 .b-OnlineStoreHeader {
   position: relative;
   min-height: 60px;
