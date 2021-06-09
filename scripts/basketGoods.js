@@ -64,6 +64,7 @@ class BasketItem {
             </tr>`;
         let tbody = document.querySelector('tbody');
         tbody.insertAdjacentHTML('beforeend', goodsInBasket);
+        console.log(goodsInBasket);
 
     }
     /**
@@ -135,5 +136,3 @@ class BasketItem {
         }
     }
 }
-// let basketItem = new BasketItem();
-// basketItem.addEventListenerGoodButton();
