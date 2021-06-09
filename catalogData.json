@@ -2,28 +2,28 @@
   {
 
     "imageUrl": "image/goods/img1.jpg",
-    "title": "Phone",
+    "title": "Наушники",
     "price": 150,
     "id": 0
   },
   {
 
     "imageUrl": "image/goods/img2.jpg",
-    "title": "Headphones",
+    "title": "Телефон",
     "price": 50,
     "id": 1
   },
   {
 
     "imageUrl": "image/goods/img3.jpg",
-    "title": "Wireless headphones",
+    "title": "Беспроводные наушники",
     "price": 350,
     "id": 2
   },
   {
 
     "imageUrl": "image/goods/img4.jpg",
-    "title": "Wristwatch",
+    "title": "Часы",
     "price": 250,
     "id": 3
   }

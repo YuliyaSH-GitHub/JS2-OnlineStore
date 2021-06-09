@@ -17,6 +17,12 @@
   <body>
     <div class="onlineStoreContainer">
       <header class="b-OnlineStoreHeader b-OnlineStoreHeader_disposition">
+        <form action="#" class="searchForm">
+          <input type="text" class="searchField" />
+          <button class="btnSearch" type="submit">
+            <i class="fas fa-search iconBtnSearch"></i>
+          </button>
+        </form>
         <button class="b-OnlineStoreHeader__basketButton">Корзина</button>
         <div
           class="
@@ -31,7 +37,9 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Цена</th>
                 <th scope="col">Количество</th>
-                <th scope="col"><i class="far fa-window-close b-buttonClose"></i></th>
+                <th scope="col">
+                  <i class="far fa-window-close b-buttonClose"></i>
+                </th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -53,9 +61,8 @@
         <div class="b-goodsList b-goodsList_grid"></div>
       </main>
     </div>
-        <script defer src="scripts/basketGoods.js"></script>
+    <script defer src="scripts/basketGoods.js"></script>
     <script defer src="scripts/goodsList.js"></script>
     <script defer src="scripts/basket.js"></script>
-
   </body>
 </html>
