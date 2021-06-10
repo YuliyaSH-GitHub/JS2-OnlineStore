@@ -18,6 +18,7 @@ class BasketItem {
                 });
             });
         });
+        
     }
     /**
      * Метод добавляет товары в корзину
@@ -27,26 +28,45 @@ class BasketItem {
         this._addProductToObject(product);
         this._renderGoodsInBasket(product);
         this._renderTotalSum();
-        this._addRemoveBtnLesteners();
+
     }
     /**
      * Метод добавляет товары в массив товаров this.products
      * @param {id: string, title: string, price: string} product 
      */
     _addProductToObject(product) {
-        if (this.products[product.id] == undefined) {
-            this.products[product.id] = {
+        if (this.products.length == 0) {
+            let item = {
+                id: product.id,
                 title: product.title,
                 price: product.price,
                 count: 1,
+            };
+            this.products.push(item);
+            return this.products;
+        }
+        if (this.products.length != 0) {
+            let findProduct = this.products.find(elem => elem.id === product.id);
+            if (findProduct) {
+                findProduct.count++
+            } else {
+                let item = {
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    count: 1,
+                };
+                this.products.push(item);
+                return this.products;
             }
-        } else {
-            this.products[product.id].count++;
+            return this.products;
         }
 
     }
+
     /**
      * Метод отрисовывает товары в корзине
+     *@param {id: string, title: string, price: string} product
      */
     _renderGoodsInBasket(product) {
         let productExist = document.querySelector(`.productCount[data-id="${product.id}"]`);
@@ -60,12 +80,13 @@ class BasketItem {
             <td>${product.title}</td>
             <td>${product.price}</td>
             <td class="productCount" data-id="${product.id}">1</td>
-            <td><i class="fas fa-trash-alt productRemoveBtn" data-id="${product.id}"></i></td>
+            <td><i class="far fa-minus-square productRemoveBtn" data-id="${product.id}"></i><i class="fas fa-trash-alt productRemoveGoods" data-id="${product.id}"></i></td>
             </tr>`;
         let tbody = document.querySelector('tbody');
         tbody.insertAdjacentHTML('beforeend', goodsInBasket);
-        console.log(goodsInBasket);
-
+        // console.log(goodsInBasket);
+        this._addRemoveBtnLesteners();
+        this._addRemoveGoodsLesteners();
     }
     /**
      * Метод выводит стоимость корзины 
@@ -87,52 +108,67 @@ class BasketItem {
      * Метод назначает обработчик события кнопкам удаления из корзины 
      */
     _addRemoveBtnLesteners() {
-        let dropdownMenu = document.querySelector('.b-OnlineStoreHeader__dropdownMenu');
-        let productRemoveBtn = dropdownMenu.querySelectorAll('.productRemoveBtn');
-        console.log(productRemoveBtn);
+        let productRemoveBtn = document.querySelectorAll('.productRemoveBtn');
+        // console.log(productRemoveBtn);
         productRemoveBtn.forEach(item => {
-            item.addEventListener('click', this._removeProduct.bind(this));
+            item.addEventListener('click', (e) => this._removeItemProduct(e));
         });
+    }
+    /**
+     * Метод назначает обработчик события кнопкам добавления в корзины 
+     */
+    _addRemoveGoodsLesteners() {
+        let productRemoveGoods = document.querySelectorAll('.productRemoveGoods');
+        // console.log(productRemoveBtn);
+        productRemoveGoods.forEach(item => {
+            item.addEventListener('click', (e) => this._removeProduct(e));
+        });
+    }
+    /**
+     * Метод удаляет 1 товар из позиции и пересчитывает стоимость корзины
+     * @param {Event} e 
+     */
+    _removeItemProduct(e) {
+        let id = e.target.dataset.id;
+        this._removeItemGoods(id);
+        this._renderTotalSum();
+
+    }
+    /**
+     *  Метод запускает удаление позиции товара из корзины и массива товаров
+     * @param {string} id
+     */
+    _removeItemGoods(id) {
+        let findProduct = this.products.find(elem => elem.id == id);
+        if (findProduct.count > 1) {
+            findProduct.count--;
+            let countTd = document.querySelector(`.productCount[data-id="${id}"]`);
+            countTd.textContent--;
+        }
+        return this.products;
+        // console.log(this.products);
     }
     /**
      * Метод удаляет товар из корзины и пересчитывает стоимость корзины
      * @param {Event} e 
      */
     _removeProduct(e) {
-        this._removeGoods(e);
+        let id = e.target.dataset.id;
+        this._removeGoods(id);
         this._renderTotalSum();
-
     }
     /**
      *  Метод запускает удаление из корзины и из массива товаров
-     * @param {Event} e 
-     */
-    _removeGoods(e) {
-        let id = e.target.dataset.id;
-        this._removeProductFromObject(id);
-        this._removeProductFromBasket(id);
-    }
-    /**
-     * Метод удаляет продукт из массива с продуктами.
      * @param {string} id
      */
-    _removeProductFromObject(id) {
-        if (this.products[id].count == 1) {
-            delete this.products[id];
-        } else {
-            this.products[id].count--;
-        }
-    }
-    /**
-     *  Метод удаляет товар из корзины.
-     * @param {string} id
-     */
-    _removeProductFromBasket(id) {
+    _removeGoods(id) {
+        let findProduct = this.products.find(elem => elem.id == id);
+        console.log(findProduct);
+        this.products.splice((this.products.indexOf(findProduct)), 1);
         let countTd = document.querySelector(`.productCount[data-id="${id}"]`);
-        if (countTd.textContent == 1) {
-            countTd.parentNode.remove();
-        } else {
-            countTd.textContent--;
-        }
+        countTd.parentNode.remove();
+        return this.products;
     }
+
 }
+
